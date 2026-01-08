@@ -41,7 +41,7 @@ async function main() {
 
     const token = await tokenResp.json();
 
-    await fetch(`returnAddress:${port}/token`, {
+    await fetch(`${returnAddress}:${port}/token`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
