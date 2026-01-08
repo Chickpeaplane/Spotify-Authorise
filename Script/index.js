@@ -39,7 +39,7 @@ async function main() {
     sessionStorage.setItem("scope", scope);
 
     const redirectUri =
-        "https://yourname.github.io/spotify-connect/callback.html";
+        "https://chickpeaplane.github.io/Spotify-Authorise/callback";
 
     const authUrl =
         "https://accounts.spotify.com/authorize?" +

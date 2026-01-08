@@ -20,7 +20,7 @@ async function main() {
     }
 
     const redirectUri =
-        "https://yourname.github.io/spotify-connect/callback.html";
+        "https://chickpeaplane.github.io/Spotify-Authorise/callback";
 
     const tokenResp = await fetch(
         "https://accounts.spotify.com/api/token",
