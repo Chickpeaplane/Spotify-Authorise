@@ -20,6 +20,7 @@ async function main() {
     const clientId = params.get("client_id");
     const scope = params.get("scope");
     let returnAddress = params.get("returnTo");
+    const useFragments = params.get("useFragments");
 
     if (!clientId || !scope || !returnAddress) {
         document.body.innerHTML = "<h2>Missing parameters</h2>";
@@ -35,6 +36,7 @@ async function main() {
     sessionStorage.setItem("returnAddress", returnAddress);
     sessionStorage.setItem("client_id", clientId);
     sessionStorage.setItem("scope", scope);
+    sessionStorage.setItem("useFragments", useFragments);
 
     const redirectUri =
         "https://chickpeaplane.github.io/Spotify-Authorise/callback";
