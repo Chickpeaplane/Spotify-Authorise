@@ -45,9 +45,10 @@ async function main() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             access_token: token.access_token,
-            refresh_token: token.refresh_token,
+            token_type: token.token_type,
+            scope: token.scope,
             expires_in: token.expires_in,
-            scope: token.scope
+            refresh_token: token.refresh_token
         })
     });
 

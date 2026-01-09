@@ -20,15 +20,10 @@ async function main() {
     const clientId = params.get("client_id");
     const scope = params.get("scope");
     let returnAddress = params.get("returnTo");
-    const port = params.get("port");
 
     if (!clientId || !scope || !returnAddress) {
         document.body.innerHTML = "<h2>Missing parameters</h2>";
         return;
-    }
-
-    if (port) {
-        returnAddress += `:${port}`;
     }
 
     const verifier = randomString();
@@ -38,7 +33,6 @@ async function main() {
     sessionStorage.setItem("verifier", verifier);
     sessionStorage.setItem("state", state);
     sessionStorage.setItem("returnAddress", returnAddress);
-    sessionStorage.setItem("port", port);
     sessionStorage.setItem("client_id", clientId);
     sessionStorage.setItem("scope", scope);
 
