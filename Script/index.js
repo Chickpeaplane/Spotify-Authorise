@@ -19,12 +19,16 @@ async function main() {
 
     const clientId = params.get("client_id");
     const scope = params.get("scope");
-    const returnAddress = params.get("returnTo");
+    let returnAddress = params.get("returnTo");
     const port = params.get("port");
 
-    if (!clientId || !scope || !returnAddress || !port) {
+    if (!clientId || !scope || !returnAddress) {
         document.body.innerHTML = "<h2>Missing parameters</h2>";
         return;
+    }
+
+    if (port) {
+        returnAddress += `:${port}`;
     }
 
     const verifier = randomString();

@@ -6,7 +6,6 @@ async function main() {
     const verifier = sessionStorage.getItem("verifier");
     const expectedState = sessionStorage.getItem("state");
     const returnAddress = sessionStorage.getItem("returnAddress");
-    const port = sessionStorage.getItem("port");
     const clientId = sessionStorage.getItem("client_id");
 
     if (!code || !verifier || !returnAddress || !port || !clientId) {
@@ -41,7 +40,7 @@ async function main() {
 
     const token = await tokenResp.json();
 
-    await fetch(`${returnAddress}:${port}/token`, {
+    await fetch(`${returnAddress}/token`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
