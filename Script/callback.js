@@ -8,7 +8,7 @@ async function main() {
     const returnAddress = sessionStorage.getItem("returnAddress");
     const clientId = sessionStorage.getItem("client_id");
 
-    if (!code || !verifier || !returnAddress || !port || !clientId) {
+    if (!code || !verifier || !returnAddress || !clientId) {
         document.body.innerHTML = "<h2>Authorization failed</h2>";
         return;
     }
