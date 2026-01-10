@@ -65,7 +65,7 @@ async function main() {
         });
     }
 
-    document.body.innerHTML += "<p>Token sent to device.</p>";
+    document.getElementById("statusLabel").textContent += "Authorisation success!";
 }
 
 main();
