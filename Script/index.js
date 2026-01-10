@@ -1,17 +1,20 @@
-function randomString(len = 64) {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    return Array.from(crypto.getRandomValues(new Uint8Array(len)))
-        .map(x => chars[x % chars.length]).join("");
+const generateRandomString = (length) => {
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const values = crypto.getRandomValues(new Uint8Array(length));
+    return values.reduce((acc, x) => acc + possible[x % possible.length], "");
 }
 
-async function sha256(str) {
-    const data = new TextEncoder().encode(str);
-    return crypto.subtle.digest("SHA-256", data);
+const sha256 = async (plain) => {
+    const encoder = new TextEncoder()
+    const data = encoder.encode(plain)
+    return window.crypto.subtle.digest('SHA-256', data)
 }
 
-function base64url(buf) {
-    return btoa(String.fromCharCode(...new Uint8Array(buf)))
-        .replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+const base64encode = (input) => {
+    return btoa(String.fromCharCode(...new Uint8Array(input)))
+        .replace(/=/g, '')
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_');
 }
 
 async function main() {
@@ -27,11 +30,12 @@ async function main() {
         return;
     }
 
-    const verifier = randomString();
-    const challenge = base64url(await sha256(verifier));
-    const state = randomString(16);
+    const codeVerifier = generateRandomString(64);
+    const hashed = await sha256(codeVerifier)
+    const codeChallenge = base64encode(hashed);
+    const state = generateRandomString(16);
 
-    sessionStorage.setItem("verifier", verifier);
+    sessionStorage.setItem("verifier", codeVerifier);
     sessionStorage.setItem("state", state);
     sessionStorage.setItem("returnAddress", returnAddress);
     sessionStorage.setItem("client_id", clientId);
@@ -49,7 +53,7 @@ async function main() {
             scope,
             redirect_uri: redirectUri,
             code_challenge_method: "S256",
-            code_challenge: challenge,
+            code_challenge: codeChallenge,
             state
         });
 
