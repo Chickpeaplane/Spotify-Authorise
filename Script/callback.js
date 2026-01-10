@@ -44,7 +44,7 @@ async function main() {
     if (useFragments) {
         const fragment =
             `#access_token=${token.access_token}` +
-            `&toekn_type=${token.token_type}` +
+            `&token_type=${token.token_type}` +
             `&scope=${encodeURIComponent(token.scope)}` +
             `&expires_in=${token.expires_in}` +
             `&refresh_token=${token.refresh_token}`;
