@@ -23,7 +23,7 @@ async function main() {
     const useFragments = params.get("useFragments");
 
     if (!clientId || !scope || !returnAddress) {
-        document.body.innerHTML = "<h2>Missing parameters</h2>";
+        document.getElementById("statusLabel").textContent = "Error: missing parameters";
         return;
     }
 

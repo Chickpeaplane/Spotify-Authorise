@@ -8,19 +8,19 @@ async function main() {
     const returnAddress = sessionStorage.getItem("returnAddress");
     const clientId = sessionStorage.getItem("client_id");
     const useFragments = sessionStorage.getItem("useFragments");
+    sessionStorage.clear();
 
     if (!code || !verifier || !returnAddress || !clientId) {
-        document.body.innerHTML = "<h2>Authorization failed</h2>";
+        document.getElementById("statusLabel").textContent = "Authorisation failed";
         return;
     }
 
     if (returnedState !== expectedState) {
-        document.body.innerHTML = "<h2>State mismatch</h2>";
+        document.getElementById("statusLabel").textContent = "State mismatch";
         return;
     }
 
-    const redirectUri =
-        "https://chickpeaplane.github.io/Spotify-Authorise/callback";
+    const redirectUri = "https://chickpeaplane.github.io/Spotify-Authorise/callback";
 
     const tokenResp = await fetch(
         "https://accounts.spotify.com/api/token",
