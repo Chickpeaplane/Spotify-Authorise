@@ -36,7 +36,7 @@ async function main() {
     sessionStorage.setItem("returnAddress", returnAddress);
     sessionStorage.setItem("client_id", clientId);
     sessionStorage.setItem("scope", scope);
-    sessionStorage.setItem("useFragments", useFragments);
+    if (useFragments) sessionStorage.setItem("useFragments", useFragments);
 
     const redirectUri =
         "https://chickpeaplane.github.io/Spotify-Authorise/callback";
